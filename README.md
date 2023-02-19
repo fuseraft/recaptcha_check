@@ -1,5 +1,7 @@
-# recaptcha_check
+# recaptcha_check (reCAPTCHA verification)
 A simple interface for verifying Google reCAPTCHA responses.
+
+You can find the gem here: [RubyGems.org](https://rubygems.org/gems/recaptcha_check)
 
 # Installation
 ```
@@ -11,7 +13,7 @@ gem install recaptcha_check
 
 `RecaptchaCheck#verify`: returns `true` if the reCAPTCHA response passes verification.
 
-# Setup
+# Configuration
 You must call `RecaptchaCheck#register` once early in your application to set the reCAPTCHA private key before using `RecaptchaCheck#verify` in other parts of your application.
 ```Ruby
 RecaptchaCheck.register 'your_reCAPTCHA_PrivateKey'
