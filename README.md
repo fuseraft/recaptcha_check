@@ -19,7 +19,7 @@ You must call `RecaptchaCheck#register` once early in your application to set th
 RecaptchaCheck.register 'your_reCAPTCHA_PrivateKey'
 ```
 
-# Example usage in a Sinatra app
+# Usage in Sinatra app
 ```Ruby
 post '/contact' do
     require 'recaptcha_check'
