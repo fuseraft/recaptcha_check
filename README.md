@@ -10,7 +10,7 @@ gem install recaptcha_check
 You must call `RecaptchaCheck#register` once early in your application to set the reCAPTCHA private key before using `RecaptchaCheck#verify` in other parts of your application. 
 
 ```Ruby
-RecaptchaCheck.register 'your_reCAPTCHA_Private-Key'
+RecaptchaCheck.register 'your_reCAPTCHA_PrivateKey'
 ```
 
 # Methods
