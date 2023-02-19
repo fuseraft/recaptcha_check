@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
     s.name        = 'recaptcha_check'
-    s.version     = '0.0.3'
+    s.version     = '0.0.4'
     s.summary     = 'A simple interface for verifying Google reCAPTCHA responses.'
     s.description = 'A simple interface for verifying Google reCAPTCHA responses in Ruby web apps.'
     s.authors     = ['Scott Stauffer']

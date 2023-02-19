@@ -1,6 +1,6 @@
 class RecaptchaCheck  
     def self.verify(params, ip = nil)
-        new(params['g-recaptcha-response'], ip).verify
+        new(params['g-recaptcha-response'], ip).verify_recaptcha
     end
 
     def self.register(recaptcha_secret_key)
@@ -16,7 +16,7 @@ class RecaptchaCheck
         @ip = ip
     end
 
-    def verify
+    def verify_recaptcha
         require 'httparty'
         recaptcha_response = HTTParty.get(recaptcha_url(@response, self.secret, @ip))
         self.response_success?(recaptcha_response)
