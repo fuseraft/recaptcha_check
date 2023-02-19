@@ -7,7 +7,7 @@ gem install recaptcha_check
 ```
 
 # prerequisites
-You must have a `.env` file containing your reCAPTCHA private key in a key called `RECAPTCHA_PRIVATE_KEY`. 
+You must add a `.env` file to the root of your application containing your reCAPTCHA private key in a key called `RECAPTCHA_PRIVATE_KEY`. 
 
 It should look something like this.
 ```
