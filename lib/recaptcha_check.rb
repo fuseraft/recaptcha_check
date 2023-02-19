@@ -6,6 +6,12 @@ class RecaptchaCheck
     def self.register(recaptcha_secret_key)
         ENV[RECAPTCHACHECK_SECRET_KEY] = recaptcha_secret_key
     end
+
+    def verify_recaptcha
+        require 'httparty'
+        recaptcha_response = HTTParty.get(recaptcha_url(@response, self.secret, @ip))
+        self.response_success?(recaptcha_response)
+    end
   
     private
 
@@ -14,12 +20,6 @@ class RecaptchaCheck
     def initialize(response, ip)
         @response = response
         @ip = ip
-    end
-
-    def verify_recaptcha
-        require 'httparty'
-        recaptcha_response = HTTParty.get(recaptcha_url(@response, self.secret, @ip))
-        self.response_success?(recaptcha_response)
     end
 
     def recaptcha_url(response, secret, ip)
