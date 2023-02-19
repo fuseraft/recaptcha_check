@@ -1,26 +1,30 @@
 # recaptcha_check
 A simple interface for verifying Google reCAPTCHA responses.
 
-# installation
+# Installation
 ```
 gem install recaptcha_check
 ```
 
-# prerequisites
-You must add a `.env` file to the root of your application containing your reCAPTCHA private key in a key called `RECAPTCHA_PRIVATE_KEY`. 
+# Setup
+You must call `RecaptchaCheck#register` once early in your application to set the reCAPTCHA private key before using `RecaptchaCheck#verify` in other parts of your application. 
 
-It should look something like this.
-```
-RECAPTCHA_PRIVATE_KEY = 'your--_reCAPTCHAPrivateKey'
+```Ruby
+RecaptchaCheck.register 'your_reCAPTCHA_Private-Key'
 ```
 
-# example usage in a sinatra app
+# Methods
+`RecaptchaCheck#register`: sets the reCAPTCHA private key to be used during verification.
+
+`RecaptchaCheck#verify`: returns `true` if the reCAPTCHA response passes verification.
+
+# Example usage in a Sinatra app
 ```Ruby
 post '/contact' do
     require 'recaptcha_check'
 
-    if RecaptchaCheck.verify(params['g-recaptcha-response'])
-        # mailer.send(params)
+    if RecaptchaCheck.verify(params)
+        # mailer.send params
         redirect '/contact/sent'
     else
         redirect back

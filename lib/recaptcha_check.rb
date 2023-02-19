@@ -1,43 +1,41 @@
-class RecaptchaCheck
-    def initialize(response, ip)
-        @response = response
-        @ip = ip
+class RecaptchaCheck  
+    def self.verify(params, ip = nil)
+        new(params['g-recaptcha-response'], ip).verify
     end
-  
-    def self.verify(response, ip = nil)
-        new(response, ip).verify
-    end
-  
-    def verify
-        require 'httparty'
-        recaptcha_response = HTTParty.get(recaptcha_url(@response, secret, @ip))
-        response_success?(recaptcha_response)
+
+    def self.register(recaptcha_secret_key)
+        ENV[RECAPTCHACHECK_SECRET_KEY] = recaptcha_secret_key
     end
   
     private
 
-    RECAPTCHA_PRIVATE_KEY = 'RECAPTCHA_PRIVATE_KEY'.freeze
+    RECAPTCHACHECK_SECRET_KEY = 'RECAPTCHACHECK_SECRET_KEY'.freeze
   
+    def initialize(response, ip)
+        @response = response
+        @ip = ip
+    end
+
+    def verify
+        require 'httparty'
+        recaptcha_response = HTTParty.get(recaptcha_url(@response, self.secret, @ip))
+        self.response_success?(recaptcha_response)
+    end
+
     def recaptcha_url(response, secret, ip)
         "https://www.google.com/recaptcha/api/siteverify?secret=#{secret}&response=#{response}&remoteip=#{ip}"
     end
   
+    def response_success?(response)
+        response.fetch('success')
+    end
+  
     def secret
-        if not self.secret_defined?
-            require 'envl'
-            Envl.auto_load
-
-            puts "#{RECAPTCHA_PRIVATE_KEY} is not defined in ENV." if not self.secret_defined?
-        end
-
-        ENV[RECAPTCHA_PRIVATE_KEY]
+        raise "Use RecaptchaCheck#register to set the reCAPTCHA secret key." if not self.secret_defined?
+        ENV[RECAPTCHACHECK_SECRET_KEY]
     end
 
     def secret_defined?
-        not ENV[RECAPTCHA_PRIVATE_KEY].nil? or not ENV[RECAPTCHA_PRIVATE_KEY].empty?
-    end
-  
-    def response_success?(response)
-        response.fetch('success')
+        not ENV[RECAPTCHACHECK_SECRET_KEY].nil?
     end
 end

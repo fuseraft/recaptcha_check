@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
     s.name        = 'recaptcha_check'
-    s.version     = '0.0.2'
+    s.version     = '0.0.3'
     s.summary     = 'A simple interface for verifying Google reCAPTCHA responses.'
     s.description = 'A simple interface for verifying Google reCAPTCHA responses in Ruby web apps.'
     s.authors     = ['Scott Stauffer']
@@ -14,6 +14,5 @@ Gem::Specification.new do |s|
       'https://rubygems.org/gems/recaptcha_check'
     s.license       = 'MIT'
     s.required_ruby_version = '>= 2.7.0'
-    s.add_runtime_dependency 'envl', '~> 0.0', '>= 0.0.8'
     s.add_runtime_dependency 'httparty', '~> 0.20', '>= 0.20.0'
   end
