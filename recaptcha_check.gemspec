@@ -10,9 +10,8 @@ Gem::Specification.new do |s|
       'source_code_uri' => 'https://github.com/scstauf/recaptcha_check',
       'documentation_uri' => 'https://rubydoc.info/github/scstauf/recaptcha_check/'
     }
-    s.homepage    =
-      'https://rubygems.org/gems/recaptcha_check'
-    s.license       = 'MIT'
+    s.homepage    = 'https://rubygems.org/gems/recaptcha_check'
+    s.license     = 'MIT'
     s.required_ruby_version = '>= 2.7.0'
     s.add_runtime_dependency 'httparty', '~> 0.20', '>= 0.20.0'
-  end
+end
